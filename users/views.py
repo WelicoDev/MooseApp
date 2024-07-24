@@ -73,14 +73,14 @@ class LogoutView(LoginRequiredMixin, View):
 
 
 class ProfileUpdateView(LoginRequiredMixin, View):
-    def get(self, request):
+    def get(self, request , username):
         user_update_form = ProfileEditForm(instance=request.user)
         context = {
             "form": user_update_form,
         }
         return render(request, 'users/profile_edit.html', context)
 
-    def post(self, request):
+    def post(self, request , username):
         user_update_form = ProfileEditForm(instance=request.user, data=request.POST, files=request.FILES)
         context = {
             "form": user_update_form,
@@ -91,6 +91,6 @@ class ProfileUpdateView(LoginRequiredMixin, View):
 
             messages.success(request, 'You have successfully updated your profile.')
 
-            return redirect('users:profile')
+            return redirect(f"/users/profile/{request.user}/")
 
         return render(request, 'users/profile_edit.html', context)

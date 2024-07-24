@@ -5,6 +5,7 @@ import requests
 from decouple import config
 from django.core.paginator import Paginator
 # Create your views here.
+
 def base(request, username):
     info = Information.objects.all().first()
     user = CustomUser.objects.get(username=username)

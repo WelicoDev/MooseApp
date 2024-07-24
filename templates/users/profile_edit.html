@@ -4,12 +4,11 @@
 
 {% block content %}
     <div class="row mx-5">
-        <h2>Profile Edit</h2>
-        <div class="col-5 mx-4">
+        <div class="mx-4">
+            <h2>Profile Edit</h2>
             <form method="post" enctype="multipart/form-data">{% csrf_token %}
                 {{ form | crispy }}
-
-             <a href="{% url 'users:profile' %}" class="btn btn-primary">Back</a>
+             <a href="{% url 'users:profile' request.user %}" class="btn btn-primary">Back</a>
             <button type="submit" class="btn btn-outline-success">Save</button>
             </form>
         </div>
