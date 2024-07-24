@@ -4,8 +4,9 @@ from .models import Category , Post , Contact , Information , Comment
 # Register your models here.
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'category', 'title', 'is_published', 'created_at']
+    list_display = ['id', 'user', 'category', 'title', 'view_count', 'is_published', 'created_at']
     list_display_links = ('id','user', 'category','title')
+    prepopulated_fields = {'slug': ('title',)}
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -14,8 +15,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ['id', 'full_name', 'email', 'subject', 'is_solved' , 'created_at']
-    list_display_links = ('id' , 'full_name' , 'subject')
+    list_display = ['id', 'name', 'email', 'subject', 'is_solved' , 'created_at']
+    list_display_links = ('id', 'name', 'subject')
 
 @admin.register(Information)
 class InfoAdmin(admin.ModelAdmin):

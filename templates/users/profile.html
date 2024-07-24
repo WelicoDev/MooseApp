@@ -17,7 +17,9 @@
 
             <div class="mt-4">
                <a href="{% url 'home' %}" class="btn btn-primary">Back</a>
+                {% if user == request.user %}
                <a class="btn btn-success" href="{% url 'users:profile_edit' %}">update</a>
+                {% endif %}
             </div>
         </div>
     </div>

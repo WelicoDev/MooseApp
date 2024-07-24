@@ -1,5 +1,7 @@
 from django.db import models
 from users.models import CustomUser
+from ckeditor.fields import RichTextField
+
 # Create your models here.
 
 class Category(models.Model):
@@ -17,8 +19,10 @@ class Post(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     category = models.ForeignKey(Category , on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
-    content = models.TextField()
-    description = models.TextField()
+    slug = models.SlugField(max_length=250)
+    content = RichTextField()
+    description = RichTextField()
+    view_count = models.IntegerField(default=0)
     is_published = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -28,7 +32,7 @@ class Post(models.Model):
         return f"{self.title}  {self.user.username}"
 
 class Contact(models.Model):
-    full_name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     email = models.EmailField(max_length=250)
     subject = models.CharField(max_length=250)
     message = models.TextField(null=True , blank=True)
@@ -54,7 +58,7 @@ class Information(models.Model):
 class Comment(models.Model):
     user = models.ForeignKey(CustomUser , on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    message = models.TextField()
+    message = RichTextField()
 
     is_public = models.BooleanField(default=True)
 

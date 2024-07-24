@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import UserCreateForm, ProfileEditForm
-
+from .models import CustomUser
 
 # Create your views here.
 
@@ -57,9 +57,10 @@ class LoginView(View):
 
 
 class ProfileView(LoginRequiredMixin, View):
-    def get(self, request):
+    def get(self, request , username):
+        user = CustomUser.objects.get(username=username)
         context = {
-            "user": request.user,
+            "user": user,
         }
         return render(request, 'users/profile.html', context)
 
