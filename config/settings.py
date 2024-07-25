@@ -120,7 +120,7 @@ TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 AUTH_USER_MODEL = "users.CustomUser"
 # Static files (CSS, JavaScript, Images)
